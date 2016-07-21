@@ -28,6 +28,18 @@ describe GroupMe::Bots do
       expect(response).to eq(true)
     end
 
+    it 'posts a message with an image to a group' do
+      data = {
+        :picture_url => 'https://i.groupme.com',
+        :bot_id => 1234567890,
+        :text => 'Test message'
+      }
+      stub_post('/bots/post', data).to_return(:status => 202, :body => ' ')
+      response = @client.bot_post(1234567890, 'Test message',
+                                  :picture_url => 'https://i.groupme.com')
+      expect(response).to eq(true)
+    end
+
   end
 
   describe '.create_bot' do

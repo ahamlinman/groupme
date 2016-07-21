@@ -20,11 +20,7 @@ module GroupMe
     # @param text [String] Text to send to the group
     # @option options [String] :picture_url Picture URL from image service
     def bot_post(id, text, options = {})
-      data = {
-        :bot_id => id,
-        :text => text
-      }
-      data[:options] = options if options.any?
+      data = options.merge(:bot_id => id, :text => text)
       post('/bots/post', data).status == 202
     end
 
